@@ -1,4 +1,4 @@
-name             'chef-capistrano'
+name             'capistrano'
 maintainer       'Yuki Osawa'
 maintainer_email 'YOUR_EMAIL'
 license          'All rights reserved'
