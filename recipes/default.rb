@@ -1,5 +1,5 @@
 #
-# Cookbook Name:: capitrano
+# Cookbook Name:: capistrano
 # Recipe:: default
 #
 # Copyright 2014, Yuki Osawa
@@ -11,7 +11,7 @@
 include_recipe "ruby_build"
 include_recipe "rbenv::system"
 
-rbv = node["capistrano"]["ruby"]["version"]
+rbv = node["chef-capistrano"]["ruby"]["version"]
 
 rbenv_ruby rbv
 rbenv_global rbv
@@ -19,13 +19,13 @@ rbenv_global rbv
 # capistrano install
 rbenv_gem "capistrano" do
 	rbenv_version rbv
-	version node["capistrano"]["version"] if node["capistrano"]["pinning_version"]
+	version node["chef-capistrano"]["version"] if node["chef-capistrano"]["pinning_version"]
 	action :install
-	options node["capistrano"]["options"] if node["capistrano"]["options"]
+	options node["chef-capistrano"]["options"] if node["chef-capistrano"]["options"]
 end
 
 # capistrano plugins install
-node["capistrano"]["plugins"].each do |plugin|
+node["chef-capistrano"]["plugins"].each do |plugin|
 	if plugin.is_a?(Hash)
 		rbenv_gem plugin["name"] do
 			%w{action version options source}.each do |attr|
